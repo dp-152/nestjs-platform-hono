@@ -1,0 +1,6 @@
+{
+  "name": "nestjs-platform-hono",
+  "version": "0.0.0",
+  "packageManager": "yarn@4.4.0",
+  "type": "module"
+}
