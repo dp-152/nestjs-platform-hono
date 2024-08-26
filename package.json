@@ -57,6 +57,8 @@
     "@swc/core": "^1",
     "@swc/plugin-transform-imports": "latest",
     "@types/node": "^22",
+    "conventional-changelog-conventionalcommits": "^7",
+    "lerna": "^8",
     "rimraf": "latest",
     "typescript": "^5"
   },
