@@ -12,6 +12,10 @@
     "README.md",
     "LICENSE.md"
   ],
+  "keywords": [
+    "nestjs",
+    "hono"
+  ],
   "scripts": {
     "build": "node ./scripts/build.mjs",
     "build:watch": "node ./scripts/build.mjs watch",
