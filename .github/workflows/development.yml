@@ -3,7 +3,7 @@ name: CI - Release Development Version
 on:
   push:
     branches:
-      - develop
+      - development
 
 permissions:
   contents: write
@@ -11,8 +11,6 @@ permissions:
 jobs:
   publish:
     runs-on: ubuntu-latest
-    environment:
-      name: develop
 
     steps:
       - name: Checkout Repository
