@@ -3,6 +3,13 @@
   "version": "0.0.0",
   "packageManager": "yarn@4.4.0",
   "type": "module",
+  "license": "GPL-3.0-only",
+  "repository": "github:dp-152/nestjs-platform-hono",
+  "files": [
+    "dist/*",
+    "README.md",
+    "LICENSE.md"
+  ],
   "dependencies": {
     "hono": "~4.5.0"
   },
