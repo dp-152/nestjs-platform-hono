@@ -12,6 +12,10 @@
     "README.md",
     "LICENSE.md"
   ],
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "build:watch": "node ./scripts/build.mjs watch"
+  },
   "exports": {
     ".": {
       "require": "./dist/index.cjs",
