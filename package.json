@@ -14,7 +14,12 @@
   ],
   "scripts": {
     "build": "node ./scripts/build.mjs",
-    "build:watch": "node ./scripts/build.mjs watch"
+    "build:watch": "node ./scripts/build.mjs watch",
+    "tscheck": "tsc --noEmit --emitDeclarationOnly false",
+    "pkg:publish": "lerna publish from-package --yes --pre-dist-tag next",
+    "pkg:publish:canary": "lerna publish --yes --canary --force-publish --allow-branch '*' --no-git-tag-version --no-push --dist-tag canary --preid canary",
+    "pkg:version:pre": "lerna version --yes --conventional-commits --conventional-prerelease --signoff-git-commit --no-commit-hooks --preid next",
+    "pkg:version:final": "lerna version --yes --conventional-commits --conventional-graduate --signoff-git-commit --no-commit-hooks"
   },
   "exports": {
     ".": {
@@ -71,5 +76,6 @@
     "@hono/node-server": {
       "optional": true
     }
-  }
+  },
+  "gitHead": "21a2c0a2f86a0e31a0e432faa36368db002c2644"
 }
