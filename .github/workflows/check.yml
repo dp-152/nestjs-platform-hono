@@ -1,0 +1,43 @@
+name: Check - Pull Request
+run-name: Checking project integrity for pull request from ${{ github.head_ref }} into ${{ github.base_ref }}
+
+on:
+  pull_request:
+    branches:
+      - "*"
+
+jobs:
+  lockfile:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Enable Yarn via Corepack
+        run: |
+          corepack enable
+          echo "Yarn version: $(yarn --version)"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+      - name: Validate lockfile integrity
+        run: yarn install --immutable --refresh-lockfile
+  typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Enable Yarn via Corepack
+        run: |
+          corepack enable
+          echo "Yarn version: $(yarn --version)"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+      - name: Install Dependencies
+        run: yarn install --immutable
+      - name: Run Type Check
+        run: yarn tscheck

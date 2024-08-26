@@ -1,0 +1,85 @@
+{
+  "name": "nestjs-platform-hono",
+  "version": "0.0.0",
+  "packageManager": "yarn@4.4.0",
+  "type": "module",
+  "license": "GPL-3.0-only",
+  "repository": "github:dp-152/nestjs-platform-hono",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
+  "files": [
+    "dist/*",
+    "README.md",
+    "LICENSE.md"
+  ],
+  "keywords": [
+    "nestjs",
+    "hono"
+  ],
+  "scripts": {
+    "build": "node ./scripts/build.mjs",
+    "build:watch": "node ./scripts/build.mjs watch",
+    "tscheck": "tsc --noEmit --emitDeclarationOnly false",
+    "pkg:publish": "lerna publish from-package --yes --pre-dist-tag next",
+    "pkg:publish:canary": "lerna publish --yes --canary --force-publish --allow-branch '*' --no-git-tag-version --no-push --dist-tag canary --preid canary",
+    "pkg:version:pre": "lerna version --yes --conventional-commits --conventional-prerelease --signoff-git-commit --no-commit-hooks --preid next",
+    "pkg:version:final": "lerna version --yes --conventional-commits --conventional-graduate --signoff-git-commit --no-commit-hooks"
+  },
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./node": {
+      "require": "./dist/node/index.cjs",
+      "import": "./dist/node/index.mjs",
+      "types": "./dist/node/index.d.ts"
+    },
+    "./custom": {
+      "require": "./dist/custom/index.cjs",
+      "import": "./dist/custom/index.mjs",
+      "types": "./dist/custom/index.d.ts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/main.d.ts"
+      ],
+      "./node": [
+        "./dist/node/index.d.ts"
+      ],
+      "./custom": [
+        "./dist/custom/index.d.ts"
+      ]
+    }
+  },
+  "dependencies": {
+    "hono": "~4.5.0"
+  },
+  "devDependencies": {
+    "@hono/node-server": "latest",
+    "@nestjs/common": "^10",
+    "@nestjs/core": "^10",
+    "@swc/cli": "latest",
+    "@swc/core": "^1",
+    "@swc/plugin-transform-imports": "latest",
+    "@types/node": "^22",
+    "conventional-changelog-conventionalcommits": "^7",
+    "lerna": "^8",
+    "rimraf": "latest",
+    "typescript": "^5"
+  },
+  "peerDependencies": {
+    "@hono/node-server": "*",
+    "@nestjs/common": "^10",
+    "@nestjs/core": "^10"
+  },
+  "peerDependenciesMeta": {
+    "@hono/node-server": {
+      "optional": true
+    }
+  },
+  "gitHead": "21a2c0a2f86a0e31a0e432faa36368db002c2644"
+}
