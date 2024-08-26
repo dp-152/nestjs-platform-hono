@@ -5,11 +5,43 @@
   "type": "module",
   "license": "GPL-3.0-only",
   "repository": "github:dp-152/nestjs-platform-hono",
+  "main": "dist/main.js",
+  "types": "dist/main.d.ts",
   "files": [
     "dist/*",
     "README.md",
     "LICENSE.md"
   ],
+  "exports": {
+    ".": {
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs",
+      "types": "./dist/index.d.ts"
+    },
+    "./node": {
+      "require": "./dist/node/index.cjs",
+      "import": "./dist/node/index.mjs",
+      "types": "./dist/node/index.d.ts"
+    },
+    "./custom": {
+      "require": "./dist/custom/index.cjs",
+      "import": "./dist/custom/index.mjs",
+      "types": "./dist/custom/index.d.ts"
+    }
+  },
+  "typesVersions": {
+    "*": {
+      ".": [
+        "./dist/main.d.ts"
+      ],
+      "./node": [
+        "./dist/node/index.d.ts"
+      ],
+      "./custom": [
+        "./dist/custom/index.d.ts"
+      ]
+    }
+  },
   "dependencies": {
     "hono": "~4.5.0"
   },
