@@ -1,0 +1,49 @@
+name: CI - Release Development Version
+
+on:
+  push:
+    branches:
+      - develop
+
+permissions:
+  contents: write
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    environment:
+      name: develop
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          fetch-depth: 0
+          fetch-tags: true
+      - name: Setup Github Identity
+        run: |
+          git config user.email "ci@github"
+          git config user.name "[CI] Github Actions"
+      - name: Enable Yarn via Corepack
+        run: |
+          corepack enable
+          echo "Yarn version: $(yarn --version)"
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: yarn
+          registry-url: https://registry.npmjs.org
+      - name: Install Dependencies
+        run: yarn install --immutable
+      - name: Build Packages
+        run: yarn build
+      - name: Version Packages
+        run: yarn pkg:version:pre --create-release github
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish Packages
+        run: yarn pkg:publish
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
